@@ -21,7 +21,7 @@ export default function Navbar() {
           aria-label="Shams Ali - Home"
           className="text-xl font-semibold tracking-wide text-gray-900 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 rounded"
         >
-          Shams Ali
+          Danish Khan
         </Link>
 
         {/* Right: Desktop links */}
