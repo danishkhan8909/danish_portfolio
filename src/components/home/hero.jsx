@@ -32,7 +32,7 @@ const Hero = () => {
           Hi, I&apos;m{' '}
           <span className="relative inline-block">
             <span className="bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
-              danish
+              Danish 
             </span>
             <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-400" />
           </span>
@@ -48,7 +48,7 @@ const Hero = () => {
 
         {/* Secondary line for credibility */}
         <p className="mx-auto mt-3 max-w-2xl text-sm sm:text-base md:text-lg text-white/70">
-          4+ years experience • MERN stack • SEO-friendly builds • Pixel-perfect responsive design
+          6 months of experience • MERN stack • SEO-friendly builds • Pixel-perfect responsive design
         </p>
 
         {/* CTA group (compact) */}

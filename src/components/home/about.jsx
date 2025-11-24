@@ -13,7 +13,7 @@ const About = () => {
           </h2>
 
           <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">
-            Hello! I&apos;m <span className="font-semibold text-orange-600">danish</span>. I&apos;m a MERN Stack Developer and DevOps Engineer with a passion for building modern web applications that are both functional and visually engaging.
+            Hello! I&apos;m <span className="font-semibold text-orange-600">Danish</span>. I&apos;m a MERN Stack Developer and DevOps Engineer with a passion for building modern web applications that are both functional and visually engaging.
           </p>
 
           <p className="mt-3 sm:mt-4 text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">

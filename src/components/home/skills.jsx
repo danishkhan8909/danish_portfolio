@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt } from 'react-icons/fa';
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt, FaGithub } from 'react-icons/fa';
 import { SiTailwindcss, SiMongodb, SiNextdotjs, SiFirebase } from 'react-icons/si';
 
 const skills = [
@@ -11,10 +11,13 @@ const skills = [
   { name: 'React', icon: <FaReact className="text-blue-400" /> },
   { name: 'Next.js', icon: <SiNextdotjs className="text-black" /> },
   { name: 'Node.js', icon: <FaNodeJs className="text-green-600" /> },
+   { name: 'Express.js', icon: <FaNodeJs className="text-purple-800" /> },
   { name: 'MongoDB', icon: <SiMongodb className="text-green-700" /> },
   { name: 'Firebase', icon: <SiFirebase className="text-yellow-500" /> },
   { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-teal-400" /> },
   { name: 'Git', icon: <FaGitAlt className="text-red-500" /> },
+   { name: 'GitHub', icon: <FaGithub className="text-red-900" /> },
+ 
 ];
 
 const Skills = () => {

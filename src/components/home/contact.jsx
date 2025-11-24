@@ -8,7 +8,7 @@ const Contact = () => {
       <div className="max-w-3xl w-full text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Contact Me</h2>
         <p className="text-lg text-gray-700 mb-8">
-          Got a project idea or just want to say hello? Fill out the form below or reach out via email!
+          Got a project idea or just want to say hello? Fill out the form below or reach out via Email.
         </p>
 
         <form className="space-y-6">
@@ -39,7 +39,7 @@ const Contact = () => {
         </form>
 
         <div className="mt-10 text-gray-600">
-          <p>Email: <a href="mailto:your.email@example.com" className="text-orange-600 hover:underline">your.email@example.com</a></p>
+          <p>Email: <a href="mailto:your.email@example.com" className="text-orange-600 hover:underline">khandanish909577@gmail.com</a></p>
           <p>Location: Mumbai, India</p>
         </div>
       </div>
