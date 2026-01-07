@@ -24,7 +24,7 @@ const About = () => {
         {/* Profile Image */}
         <div className="flex justify-center md:justify-end">
           <img
-            src="/profile.jpg"
+            src="/danish.jpg"
             alt="danish Profile"
             className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[350px] lg:h-[350px] rounded-2xl shadow-xl object-cover"
             loading="lazy"
