@@ -85,7 +85,7 @@ const Contact = () => {
               name="message"
               rows="5"
               placeholder="Write your message..."
-              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 text-zinc-900"
               required
             ></textarea>
           </div>
