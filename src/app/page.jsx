@@ -6,6 +6,7 @@ import Skills from "@/components/home/skills";
 import Navbar from "@/components/layout/navbar";
 
 
+
 export default function Home() {
   return (
     <>
@@ -14,6 +15,7 @@ export default function Home() {
     <About/>
     <Skills/>
     <Contact/>
+    
     </>
     
   );
