@@ -5,27 +5,27 @@ import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const sendEmail = (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  emailjs.sendForm(
-    process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-    process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-    e.target,
-    process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-  )
-  .then(
-    (result) => {
-      alert("Email sent successfully ✅");
-      console.log(result.text);
-    },
-    (error) => {
-      alert("Error ❌");
-      console.log(error.text);
-    }
-  );
+    emailjs.sendForm(
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+      e.target,
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+    )
+      .then(
+        (result) => {
+          alert("Email sent successfully ✅");
+          console.log(result.text);
+        },
+        (error) => {
+          alert("Error ❌");
+          console.log(error.text);
+        }
+      );
 
-  e.target.reset();
-};
+    e.target.reset();
+  };
   return (
     <section id='contact' className="min-h-screen flex items-center justify-center px-6 bg-gray-50">
       <div className="max-w-3xl w-full text-center">
@@ -35,27 +35,61 @@ const Contact = () => {
         </p>
 
         <form className="space-y-6" onSubmit={sendEmail}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
-            required
-          />
-          <textarea
-            placeholder="Your Message"
-            name="message"
-            rows="5"
-            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
-            required
-          ></textarea>
+
+          {/* Name */}
+          <div className="text-left">
+            <label
+              htmlFor="name"
+              className="block mb-1 text-sm font-medium text-gray-700"
+            >
+              Your Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter your name"
+              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              required
+            />
+          </div>
+
+          {/* Email */}
+          <div className="text-left">
+            <label
+              htmlFor="email"
+              className="block mb-1 text-sm font-medium text-gray-700"
+            >
+              Your Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              required
+            />
+          </div>
+
+          {/* Message */}
+          <div className="text-left">
+            <label
+              htmlFor="message"
+              className="block mb-1 text-sm font-medium text-gray-700"
+            >
+              Your Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              placeholder="Write your message..."
+              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              required
+            ></textarea>
+          </div>
+
           <button
             type="submit"
             className="bg-orange-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-orange-700 transition duration-300"
