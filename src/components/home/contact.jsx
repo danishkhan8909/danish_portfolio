@@ -7,29 +7,46 @@ import { FaPaperPlane, FaSpinner } from 'react-icons/fa';
 const Contact = () => {
   const [status, setStatus] = useState(null); // 'sending' | 'success' | 'error'
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-    setStatus('sending');
+  const sendEmail = async (e) => {
+  e.preventDefault();
 
-    emailjs.sendForm(
+  setStatus("sending");
+
+  try {
+    console.log("SERVICE ID:", process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID);
+    console.log("TEMPLATE ID:", process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID);
+    console.log("PUBLIC KEY:", process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+
+    const result = await emailjs.sendForm(
       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
       process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
       e.target,
       process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-    )
-      .then(
-        () => {
-          setStatus('success');
-          setTimeout(() => setStatus(null), 5000);
-        },
-        () => {
-          setStatus('error');
-          setTimeout(() => setStatus(null), 5000);
-        }
-      );
+    );
 
+    console.log("✅ Email Sent Successfully:", result);
+
+    setStatus("success");
+
+    // Reset form only after successful send
     e.target.reset();
-  };
+
+    setTimeout(() => {
+      setStatus(null);
+    }, 5000);
+
+  } catch (error) {
+    console.error("❌ EmailJS Error:", error);
+    console.log("Status:", error.status);
+    console.log("Message:", error.text);
+
+    setStatus("error");
+
+    setTimeout(() => {
+      setStatus(null);
+    }, 5000);
+  }
+};
 
   return (
     <section
