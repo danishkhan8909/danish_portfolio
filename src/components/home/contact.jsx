@@ -1,52 +1,49 @@
 'use client';
 
 import React, { useState } from 'react';
-import emailjs from "@emailjs/browser";
 import { FaPaperPlane, FaSpinner } from 'react-icons/fa';
 
 const Contact = () => {
   const [status, setStatus] = useState(null); // 'sending' | 'success' | 'error'
 
   const sendEmail = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
+    setStatus('sending');
 
-  setStatus("sending");
+    const form = e.target;
+    const formData = new FormData(form);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const message = formData.get('message');
 
-  try {
-    console.log("SERVICE ID:", process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID);
-    console.log("TEMPLATE ID:", process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID);
-    console.log("PUBLIC KEY:", process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message }),
+      });
 
-    const result = await emailjs.sendForm(
-      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-      e.target,
-      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-    );
+      const data = await res.json();
 
-    console.log("✅ Email Sent Successfully:", result);
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to send message');
+      }
 
-    setStatus("success");
+      setStatus('success');
+      form.reset();
 
-    // Reset form only after successful send
-    e.target.reset();
+      setTimeout(() => {
+        setStatus(null);
+      }, 5000);
+    } catch (error) {
+      console.error('❌ Contact Form Error:', error);
+      setStatus('error');
 
-    setTimeout(() => {
-      setStatus(null);
-    }, 5000);
-
-  } catch (error) {
-    console.error("❌ EmailJS Error:", error);
-    console.log("Status:", error.status);
-    console.log("Message:", error.text);
-
-    setStatus("error");
-
-    setTimeout(() => {
-      setStatus(null);
-    }, 5000);
-  }
-};
+      setTimeout(() => {
+        setStatus(null);
+      }, 5000);
+    }
+  };
 
   return (
     <section
@@ -166,4 +163,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
