@@ -11,28 +11,28 @@ export async function POST(req) {
       );
     }
 
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
-      console.error('❌ RESEND_API_KEY is not set in environment variables.');
-      return NextResponse.json(
-        { error: 'RESEND_API_KEY is missing on the server.' },
-        { status: 500 }
-      );
-    }
+      const apiKey = (process.env.RESEND_API_KEY || '').trim();
+      if (!apiKey || apiKey === 'your_resend_api_key_here') {
+        console.error('❌ RESEND_API_KEY is not set or still contains the placeholder value.');
+        return NextResponse.json(
+          { error: 'Please set your actual Resend API key in .env.local (it should start with re_).' },
+          { status: 500 }
+        );
+      }
 
-    // Direct REST API call - No extra npm package needed!
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'Portfolio Contact <onboarding@resend.dev>',
-        to: ['khandanish909577@gmail.com'],
-        reply_to: email,
-        subject: `New Portfolio Message from ${name}`,
-        html: `
+      // Direct REST API call - No extra npm package needed!
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'Portfolio Contact <onboarding@resend.dev>',
+          to: ['khandanish909577@gmail.com'],
+          reply_to: email,
+          subject: `New Portfolio Message from ${name}`,
+          html: `
           <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
             <div style="background: linear-gradient(135deg, #f59e0b, #ea580c); padding: 20px; text-align: center; color: white;">
               <h2 style="margin: 0; font-size: 20px;">New Message from Portfolio</h2>
@@ -51,25 +51,25 @@ export async function POST(req) {
             </div>
           </div>
         `,
-      }),
-    });
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!res.ok) {
-      console.error('❌ Resend API Error:', data);
+      if (!res.ok) {
+        console.error('❌ Resend API Error:', data);
+        return NextResponse.json(
+          { error: data.message || 'Failed to send email' },
+          { status: res.status }
+        );
+      }
+
+      return NextResponse.json({ success: true, data });
+    } catch (error) {
+      console.error('❌ Server Error:', error);
       return NextResponse.json(
-        { error: data.message || 'Failed to send email' },
-        { status: res.status }
+        { error: error.message || 'Internal Server Error' },
+        { status: 500 }
       );
     }
-
-    return NextResponse.json({ success: true, data });
-  } catch (error) {
-    console.error('❌ Server Error:', error);
-    return NextResponse.json(
-      { error: error.message || 'Internal Server Error' },
-      { status: 500 }
-    );
   }
-}
