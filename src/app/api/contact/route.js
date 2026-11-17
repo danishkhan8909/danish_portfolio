@@ -64,6 +64,7 @@ export async function POST(req) {
         );
       }
 
+      console.log('✅ Resend sent successfully! Email ID:', data.id);
       return NextResponse.json({ success: true, data });
     } catch (error) {
       console.error('❌ Server Error:', error);
